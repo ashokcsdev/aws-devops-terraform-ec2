@@ -8,12 +8,23 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   terraform:
     name: Terraform Validate & Plan
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::839084984521:role/GitHubActions-Terraform-EC2
+          aws-region: ap-south-1
+
       - name: Checkout
         uses: actions/checkout@v4
 
