@@ -46,3 +46,8 @@ jobs:
         if: github.event_name == 'push'
         working-directory: terraform
         run: terraform apply -auto-approve
+
+      - name: Terraform Output
+        if: github.event_name == 'push'
+        working-directory: terraform
+        run: terraform output
